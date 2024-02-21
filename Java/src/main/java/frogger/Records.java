@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Zishen Wen (F22), Deyuan Chen (S22)
  */
 public class Records {
-    private final Set<Record> records;
+    private final Set<SingleRecord> records;
 
     public Records() 
     {
@@ -32,13 +32,13 @@ public class Records {
      */
     public boolean addRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
     {
-        return records.add(new Record(firstName, lastName, phoneNumber, zipCode, state, gender));
+        return records.add(new SingleRecord(firstName, lastName, phoneNumber, zipCode, state, gender));
     }
 
-    private static class Record {
+    private static class SingleRecord {
         String firstName, lastName, phoneNumber, zipCode, state, gender;
 
-        Record(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
+        SingleRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -56,7 +56,7 @@ public class Records {
                 return true;
             if (o == null || getClass() != o.getClass()) 
                 return false;
-            Record record = (Record) o;
+            SingleRecord record = (SingleRecord) o;
             return firstName.equals(record.firstName) &&
                     lastName.equals(record.lastName) &&
                     phoneNumber.equals(record.phoneNumber) &&
