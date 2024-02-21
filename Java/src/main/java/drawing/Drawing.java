@@ -30,10 +30,12 @@ public class Drawing {
      */
     public void draw(String format, String filename) {
         // TODO: Do you notice any issues here?
+        // would probably be better to extract this into a separate method and use a switch statement to create the writer accordingly
         if (format.equals("jpeg")) {
             try (Writer writer = new JPEGWriter(filename + ".jpeg")) {
                 for (Shape shape : this.shapes) {
                     // TODO: What is the issue of the behavior here?
+                    // The toLines method should be called within the shape itself maybe in a constructor or the draw method
                     Line[] lines = shape.toLines();
                     shape.draw(writer, lines);
                 }

@@ -27,6 +27,7 @@ public interface Shape {
         try {
             for (Line line : lines) {
                 // TODO: what is the purpose of the code there?
+                // Anti-polymorphism? Should use strategy pattern instead.
                 if (writer instanceof JPEGWriter) {
                     writer.write(line.toJPEG());
                 } else if (writer instanceof PNGWriter) {
