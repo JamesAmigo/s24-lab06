@@ -43,18 +43,6 @@ public class Frogger {
         return true;
     }
 
-    // TODO: Do you notice any issues here?
-    public boolean isOccupied(int position) {
-        boolean[] occupied = this.road.getOccupied();
-        return occupied[position];
-    }
-    
-    public boolean isValid(int position) {
-        if (position < 0) return false;
-        boolean[] occupied = this.road.getOccupied();
-        return position < occupied.length;
-    }
-
     // This method is a refactored version of the original isOccupied method and the isValid method.
     /**
      * Checks if the position is valid and not occupied.
