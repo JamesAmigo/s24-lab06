@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Zishen Wen (F22), Deyuan Chen (S22)
  */
 public class Records {
-    private final Set<SingleRecord> records;
+    private final Set<FroggerID> records;
 
     public Records() 
     {
@@ -30,46 +30,8 @@ public class Records {
      * @param gender      gender of the frogger
      * @return Return false if the record has existed. Else, return true.
      */
-    public boolean addRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
+    public boolean addRecord(FroggerID froggerID) 
     {
-        return records.add(new SingleRecord(firstName, lastName, phoneNumber, zipCode, state, gender));
-    }
-
-    private static class SingleRecord {
-        String firstName, lastName, phoneNumber, zipCode, state, gender;
-
-        SingleRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.phoneNumber = phoneNumber;
-            this.zipCode = zipCode;
-            this.state = state;
-            this.gender = gender;
-        }
-
-        //This equals method makes sure that when two records have the same information, they are considered equal.
-        @Override
-        public boolean equals(Object o) 
-        {
-            if (this == o)
-                return true;
-            if (o == null || getClass() != o.getClass()) 
-                return false;
-            SingleRecord record = (SingleRecord) o;
-            return firstName.equals(record.firstName) &&
-                    lastName.equals(record.lastName) &&
-                    phoneNumber.equals(record.phoneNumber) &&
-                    zipCode.equals(record.zipCode) &&
-                    state.equals(record.state) &&
-                    gender.equals(record.gender);
-        }
-
-        //This hashCode method makes sure every record with the same information has the same hash code.
-        @Override
-        public int hashCode() 
-        {
-            return Objects.hash(firstName, lastName, phoneNumber, zipCode, state, gender);
-        }
+        return records.add(froggerID);
     }
 }
