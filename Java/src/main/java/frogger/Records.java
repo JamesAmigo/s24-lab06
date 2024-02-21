@@ -1,7 +1,10 @@
 package frogger;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Refactor Task 2.
@@ -9,10 +12,11 @@ import java.util.List;
  * @author Zishen Wen (F22), Deyuan Chen (S22)
  */
 public class Records {
-    private final List<String[]> records;
+    private final Set<Record> records;
 
-    public Records() {
-        this.records = new ArrayList<>();
+    public Records() 
+    {
+        this.records = new HashSet<>();
     }
 
     /**
@@ -26,20 +30,46 @@ public class Records {
      * @param gender      gender of the frogger
      * @return Return false if the record has existed. Else, return true.
      */
-    public boolean addRecord(String firstName, String lastName, String phoneNumber,
-                             String zipCode, String state, String gender) {
-        for (String[] row : this.records) {
-            if (row[0].equals(firstName)
-                    && row[1].equals(lastName)
-                    && row[2].equals(phoneNumber)
-                    && row[3].equals(zipCode)
-                    && row[4].equals(state)
-                    && row[5].equals(gender)) {
-                return false;
-            }
+    public boolean addRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
+    {
+        return records.add(new Record(firstName, lastName, phoneNumber, zipCode, state, gender));
+    }
+
+    private static class Record {
+        String firstName, lastName, phoneNumber, zipCode, state, gender;
+
+        Record(String firstName, String lastName, String phoneNumber, String zipCode, String state, String gender) 
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phoneNumber = phoneNumber;
+            this.zipCode = zipCode;
+            this.state = state;
+            this.gender = gender;
         }
-        this.records.add(
-                new String[]{firstName, lastName, phoneNumber, zipCode, state, gender});
-        return true;
+
+        //This equals method makes sure that when two records have the same information, they are considered equal.
+        @Override
+        public boolean equals(Object o) 
+        {
+            if (this == o)
+                return true;
+            if (o == null || getClass() != o.getClass()) 
+                return false;
+            Record record = (Record) o;
+            return firstName.equals(record.firstName) &&
+                    lastName.equals(record.lastName) &&
+                    phoneNumber.equals(record.phoneNumber) &&
+                    zipCode.equals(record.zipCode) &&
+                    state.equals(record.state) &&
+                    gender.equals(record.gender);
+        }
+
+        //This hashCode method makes sure every record with the same information has the same hash code.
+        @Override
+        public int hashCode() 
+        {
+            return Objects.hash(firstName, lastName, phoneNumber, zipCode, state, gender);
+        }
     }
 }
