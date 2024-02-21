@@ -36,7 +36,7 @@ public class Frogger {
      */
     public boolean move(boolean forward) {
         int nextPosition = this.position + (forward ? 1 : -1);
-        if (!isValid(nextPosition) || isOccupied(nextPosition)) {
+        if (isTraversable(nextPosition)) {
             return false;
         }
         this.position = nextPosition;
@@ -53,6 +53,22 @@ public class Frogger {
         if (position < 0) return false;
         boolean[] occupied = this.road.getOccupied();
         return position < occupied.length;
+    }
+
+    // This method is a refactored version of the original isOccupied method and the isValid method.
+    /**
+     * Checks if the position is valid and not occupied.
+     * @param position the position to check.
+     * @return true if the position is valid and not occupied, else false.
+     */
+    private boolean isTraversable(int position) 
+    {
+        boolean[] occupied = this.road.getOccupied();
+        if(position < 0 || position >= occupied.length)
+        {
+            return false;
+        }
+        return !occupied[position];
     }
 
     /**
